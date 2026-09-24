@@ -5,12 +5,12 @@ PlanTree is a personalized gardening application that is designed to guide users
 
 Planned Features
 
-1.) Virtual garden for tracking plants
-2.) Virtual pantry for harvested produce
-3.) Plant-care information 
-4.) Produce fresness estimate
-5.) Recipe recommendation based on users plants
-6.) Food-storage reccomendation
-7.) Plant recommendation based on growing condition
+1. Virtual garden for tracking plants
+2. Virtual pantry for harvested produce
+3. Plant-care information 
+4. Produce fresness estimate
+5. Recipe recommendation based on users plants
+6. Food-storage reccomendation
+7. Plant recommendation based on growing condition
 
 
