@@ -1,3 +1,5 @@
+from pages import auth
+
 def get_storage_method():
     while True:
         print("---------- Storage Method  --------------------")
@@ -49,11 +51,7 @@ def get_storage_method():
 
             
         elif choice == "10":
-            return "Vaccuum Sealed"
-
-
-        elif choice == "11":
-            return home
+            return "Vacuum Sealed"
 
             
 
@@ -70,7 +68,7 @@ def get_storage_date():
 
         section_date = storage_date.split("-")
 
-        if len(storage_date) == 3 and all(storage_date.isdigit() for section in section_date):
+        if len(section_date) == 3 and all(section.isdigit() for section in section_date):
             return storage_date
 
         print("Invalid. Use YYYY-MM-DD format.")
@@ -94,11 +92,11 @@ def add_to_pantry(username):
     tips = input("Storage tip: ")
 
     pantry_item = {
-        "produce:": produce,
-        "storage_method:": storage_method,
-        "storage_date:": storage_date,
-        "amount:": amount,
-        "tips:": tips
+        "produce": produce,
+        "storage_method": storage_method,
+        "storage_date": storage_date,
+        "amount": amount,
+        "tips": tips
     }
 
     auth.users[username]["pantry"].append(pantry_item)
@@ -147,7 +145,7 @@ def pantry_menu(username):
 
             
         elif choice == "3":
-            return home
+            return 
 
             
 

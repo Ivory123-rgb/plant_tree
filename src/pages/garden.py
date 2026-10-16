@@ -42,16 +42,17 @@ def get_sunlight_amount():
     while True:
         try:
             sunlight = int(
-                input("Hours of sunlight plant recieves each day: ")
+                input("Hours of sunlight plant recieves each day: "))
 
-                if sunlight >= 0 and sunlight <= 24:
-                    return sunlight
+            if sunlight >= 0 and sunlight <= 24:
+                return sunlight
 
-                print("Sunlight hours must be between 0 and 24 hrs. ")
+            print("Sunlight hours must be between 0 and 24 hrs. ")
 
 
-        
-            )
+        except ValueError:
+            print("Enter a whole number.")
+            
 
 def add_grow_space(username):
     auth.load_users()
@@ -59,15 +60,16 @@ def add_grow_space(username):
    
     grow_name = input("Growing space:  ")
     location = get_location()
-    sunlight = get_sunlight_hrs("")
-    container_size = input("What is the container type that you will be growing your plant in: ")
+
+    sunlight = get_sunlight_amount()
+    container_size = auth.get_string("What is the container type that you will be growing your plant in: ")
 
 
     growing_space = {
         "grow_name": grow_name,
-        "location:": location,
-        "sunlight:": sunlight,
-        "container_size:": container_size
+        "location": location,
+        "sunlight": sunlight,
+        "container_size": container_size
     }
 
     auth.users[username]["growing_spaces"].append(growing_space)
@@ -97,14 +99,19 @@ def select_growing_spaces(username):
             if choice >= 1 and choice <= len(spaces):
                 return spaces[choice - 1]
 
-def plant_date():
+            print("Invalid selection")
+
+        except ValueError:
+            print("Enter a whole number")
+
+def get_plant_date():
     while True:
         plant_date = input("Enter Date Planted (yyyy-MM-DD):")
 
-        plant_section_date = storage_date.split("-")
+        plant_section_date = plant_date.split("-")
 
         if len(plant_section_date) == 3 and all(section.isdigit() for section in plant_section_date):
-            return storage_date
+            return plant_date
 
         print("Invalid. Use YYYY-MM-DD format.")
 
@@ -119,7 +126,7 @@ def get_plant_progress():
         print("3.) Seedling")
         print("4.) Vegetative Growth")
         print("5.) Budding and Flowering")
-        print("6.) Repening / Harvest")
+        print("6.) Harvest")
         
   
         choice = input("Select option: ")
@@ -140,7 +147,7 @@ def get_plant_progress():
             return " Budding and Flowering"
 
         elif choice == "6":
-            return "Rady to Harvest"
+            return "Ready to Harvest"
 
         else:
             print("Invalid selection")
@@ -151,7 +158,7 @@ def get_plant_progress():
 def add_plant(username):
     auth.load_users()
 
-    selected_space = select_Growing_spaces(username)
+    selected_space = select_growing_spaces(username)
 
     if selected_space is None:
         return
@@ -200,14 +207,14 @@ def view_garden(username):
 
         print("Plants: ")
 
-    for plant in plants:
-        if plant["growing_spaces"] == space["grow_name"]:
-            print(f"Plant: {plant['plant_type']}")
-            print(f"Date Planted: {plant['plant_date']}")
-            print(f"Progress: {plant['plant_progress']}")
+        for plant in plants:
+            if plant["growing_space"] == space["grow_name"]:
+                print(f"Plant: {plant['plant_type']}")
+                print(f"Date Planted: {plant['plant_date']}")
+                print(f"Progress: {plant['plant_progress']}")
 
-            print(f"Watering Frequence: {plant['water_freq']}")
-            print(f"Plant Notes: {plant['notes']}")
+                print(f"Watering Frequence: {plant['watering_freq']}")
+                print(f"Plant Notes: {plant['notes']}")
 
 def garden_menu(username):
      while True: 

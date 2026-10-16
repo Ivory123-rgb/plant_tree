@@ -1,6 +1,6 @@
 import json
 import os
-from pages.home import home_menu
+
 
 USERS_FILE = "users.txt"
 
@@ -22,12 +22,12 @@ def load_users():
 
 
     for user in users.values():
-                user.setdefault("experience_level", "beginner")
-                user.setdefault("growing_spaces", [])
-                user.setdefault("garden", [])
-                user.setdefault("pantry", [])
-                user.setdefault("recipes", [])
-                user.setdefault("harvest", [])
+        user.setdefault("experience_level", "beginner")
+        user.setdefault("growing_spaces", [])
+        user.setdefault("garden", [])
+        user.setdefault("pantry", [])
+        user.setdefault("recipes", [])
+        user.setdefault("harvest", [])
 
 
 
@@ -89,17 +89,17 @@ def create_account():
 
 
     users[username] = {
-        "userID:": user_id,
-        "username:": username,
-        "password:": password,
-        "first_name:": first_name,
-        "last_name:": last_name,
-        "experience_level:": experience_level,
-        "growing_spaces:": [],
-        "garden:": [],
-        "harvest:": [],
-        "pantry:": [],
-        "recipes:": [],
+        "userID": user_id,
+        "username": username,
+        "password": password,
+        "first_name": first_name,
+        "last_name": last_name,
+        "experience_level": experience_level,
+        "growing_spaces": [],
+        "garden": [],
+        "harvest": [],
+        "pantry": [],
+        "recipes": [],
 
     }
 
@@ -112,15 +112,20 @@ def create_account():
 def login():
     load_users()
 
-    username = input("Username: ")
-    password = input("Password: ")
+    username = input("Username: ").strip()
+    password = input("Password: ").strip()
 
     if username in users and users[username]["password"] == password:
-        print("Welcome, {users[username]['first_name']}")
+        print(f"Welcome, {users[username]['first_name']}")
         return username
+
+    print("Wrong username or password")
+    return None
 
 
 def start_auth_page():
+    from pages.home import home_menu
+    
     while True:
         print("------- PLANTREE ---------")
         print("1.) Create Account")
